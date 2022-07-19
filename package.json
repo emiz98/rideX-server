@@ -1,0 +1,11 @@
+{
+  "name": "ridex-server",
+  "version": "1.0.0",
+  "description": "This app provides ridesharing facilities to the university of Sri Jayewardenepura.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "emiz",
+  "license": "ISC"
+}
