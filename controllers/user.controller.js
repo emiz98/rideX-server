@@ -5,25 +5,24 @@ exports.getIndex = (req, res) => {
     header: "Available endpoints",
     user: [
       {
-        "Create user": "/",
+        "Create User": "/create_user",
+        "Get Users": "/users",
+        "Get User By ID": "/get_user/<id>",
+        "Update User By ID": "/update_user/<id>",
       },
     ],
   });
 };
 
-exports.createUser = (req, res) => {
-  const user = {
-    username: "emiz",
-    email: "menadithrox@gmail.com",
-    password: "Encrypted_Hex256",
-    number: "123456789",
-  };
+
+exports.getUsers = (req, res) => {
   userService
-    .createUser(user)
-    .then((user) => {
-      res.status(201).json({ success: true, data: user });
+    .getUsers()
+    .then((users) => {
+      res.status(200).json({ success: true, data: users });
     })
     .catch((err) => {
-      res.status(400).json({ success: false, error: "Registration Failed" });
+      res.status(400).json({ success: false, error: "Get users failed" });
     });
+
 };
