@@ -1,5 +1,6 @@
 const express = require("express");
 const userController = require("../controllers/user.controller");
+const rideController = require("../controllers/ride.controller");
 const router = express.Router();
 
 router.get("/", userController.getIndex);
@@ -10,11 +11,14 @@ router.put("/user/update", userController.updateUser)
 router.delete("/user/delete", userController.deleteUser);
 
 // ***Driver Routes***
-// add a ride(POST)
-// view ride by driver(on going trip details)(GET)
+router.post("/ride/create", rideController.createRide);
+router.get("/ride/:ride_id", rideController.getRideDetails);
+router.put("/ride/update", rideController.updatePartners);
+router.delete("/ride/delete", rideController.deleteRide);
+router.delete("/ride/delete_partner", rideController.deletePartner);
+router.get("/ride/get_nearby")
 // Get ride history by driver(ride history schema)(GET)
-// Assign partners to ongoing ride(POST)
-// Delete a booked trip(DELETE)
+
 
 // ***Client Routes***
 // add a request(POST)

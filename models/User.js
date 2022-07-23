@@ -6,10 +6,10 @@ const UserSchema = new Schema({
   email: String,
   password: String,
   number: String,
-  location : [{
-    lat: String,
-    long: String
-  }],
+  location : {
+    lat: Number,
+    long: Number
+  },
   
 });
 
