@@ -55,6 +55,7 @@ passport.use(
         return done(
           null,
           {
+            _id: user._id,
             username: user.username,
             email: user.email,
             number: user.number,
