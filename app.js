@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -16,4 +17,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1", require("./routes/ridex_v1.routes"));
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`RideX Listening on PORT ${port}`));
+app.listen(port, process.env.IP_GATEWAY || "localhost", () =>
+  console.log(
+    `RideX Listening on IP ${process.env.IP_GATEWAY} and PORT ${port}`
+  )
+);
