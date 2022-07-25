@@ -1,20 +1,12 @@
 const express = require("express");
 const userController = require("../controllers/user.controller");
+const rideController = require("../controllers/ride.controller");
 const authController = require("../controllers/auth.controller");
 const passport = require("passport");
 const router = express.Router();
 
 // use 'passport.authenticate("jwt", { session: false })' as middleware to authenticate users
-router.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  userController.getIndex
-);
-router.post(
-  "/user/create",
-  passport.authenticate("jwt", { session: false }),
-  userController.createUser
-);
+router.get("/", userController.getIndex);
 router.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -36,7 +28,7 @@ router.delete(
   userController.deleteUser
 );
 
-// auth routs
+// auth routes
 router.post("/auth/login", authController.login);
 router.post(
   "/auth/signup",
@@ -45,11 +37,31 @@ router.post(
 );
 
 // ***Driver Routes***
-router.post("/ride/create", rideController.createRide);
-router.get("/ride/:ride_id", rideController.getRideDetails);
-router.put("/ride/update", rideController.updatePartners);
-router.delete("/ride/delete", rideController.deleteRide);
-router.delete("/ride/delete_partner", rideController.deletePartner);
+router.post(
+  "/ride/create",
+  passport.authenticate("jwt", { session: false }),
+  rideController.createRide
+);
+router.get(
+  "/ride/:ride_id",
+  passport.authenticate("jwt", { session: false }),
+  rideController.getRideDetails
+);
+router.put(
+  "/ride/update",
+  passport.authenticate("jwt", { session: false }),
+  rideController.updatePartners
+);
+router.delete(
+  "/ride/delete",
+  passport.authenticate("jwt", { session: false }),
+  rideController.deleteRide
+);
+router.delete(
+  "/ride/delete_partner",
+  passport.authenticate("jwt", { session: false }),
+  rideController.deletePartner
+);
 router.get("/ride/get_nearby");
 // Get ride history by driver(ride history schema)(GET)
 
