@@ -1,4 +1,6 @@
 const userService = require("../services/user.service");
+const {getEmail} = require("../utils/decodeToken");
+
 
 exports.getIndex = (req, res) => {
   res.send({
@@ -16,19 +18,19 @@ exports.getIndex = (req, res) => {
 };
 
 // Creating a new user
-exports.createUser = (req, res) => {
-  const user = req.body;
+// exports.createUser = (req, res) => {
+//   const user = req.body;
 
-  userService
-    .createUser(user)
-    .then((users) => {
-      res.status(200).json({ success: true, data: users });
-    })
-    .catch((err) => {
-      res.status(400).json({ success: false, error: "Creating a user failed" });
-    });
+//   userService
+//     .createUser(user)
+//     .then((users) => {
+//       res.status(200).json({ success: true, data: users });
+//     })
+//     .catch((err) => {
+//       res.status(400).json({ success: false, error: "Creating a user failed" });
+//     });
 
-};
+// };
 
 // Get all users
 exports.getUsers = (req, res) => {
@@ -45,10 +47,9 @@ exports.getUsers = (req, res) => {
 
 // Get user By email
 exports.getUserByEmail = (req, res) => {
-  email = req.params.email;
 
   userService
-    .getUserByEmail(email)
+    .getUserByEmail(getEmail(req))
     .then(user => {
       res.status(200).json({ success: true, data: user });
     })
@@ -62,7 +63,7 @@ exports.updateUser = (req, res) => {
   user = req.body;
 
   userService
-    .updateUser(user)
+    .updateUser(user, getEmail(req))
     .then(user => {
       res.status(200).json({ success: true, data: user });
     })
@@ -73,10 +74,9 @@ exports.updateUser = (req, res) => {
 
 // Delete a user
 exports.deleteUser = (req, res) => {
-  email = req.body.email
 
   userService
-    .deleteUser(email)
+    .deleteUser(getEmail(req))
     .then(user => {
       res.status(200).json({ success: true, data: user });
     })
