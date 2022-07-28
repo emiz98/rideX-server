@@ -7,11 +7,6 @@ const ClientSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-    assigned_partners: [{
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        assigned_at: Date
-    }],
     request_partner : {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -23,8 +18,7 @@ const ClientSchema = new Schema({
         long: Number
     },
     created_at: Date,
-    is_ongoing: Boolean,
-    
+
 });
 
 module.exports = models.Client || model("Client", ClientSchema);

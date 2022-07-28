@@ -1,32 +1,28 @@
 const rideService = require("../services/ride.service");
+const { getEmail, getId } = require("../utils/decodeToken");
 
 // Creating a new rider
 exports.createRide = (req, res) => {
   const rider = req.body;
-
   rideService
-    .createRide(rider)
+    .createRide(rider, getId(req))
     .then((rider) => {
       res.status(200).json({ success: true, data: rider });
     })
     .catch((err) => {
       console.log(err);
-      res
-        .status(400)
-        .json({
-          success: false,
-          error: "Creating a ride failed",
-          message: err,
-        });
+      res.status(400).json({
+        success: false,
+        error: "Creating a ride failed",
+        message: err,
+      });
     });
 };
 
 // Get ride details by Driver
 exports.getRideDetails = (req, res) => {
-  const rider = req.params.ride_id;
-
   rideService
-    .getRideDetails(rider)
+    .getRideDetails(getId(req))
     .then((rider) => {
       res.status(200).json({ success: true, data: rider });
     })
@@ -40,10 +36,10 @@ exports.getRideDetails = (req, res) => {
 
 // Update ride partners for a rideTrip
 exports.updatePartners = (req, res) => {
-  ride = req.body;
+  const partner = req.body.partner;
 
   rideService
-    .updatePartners(ride)
+    .updatePartners(partner, getEmail(req), getId(req))
     .then((rider) => {
       res.status(200).json({ success: true, data: rider });
     })
@@ -56,10 +52,8 @@ exports.updatePartners = (req, res) => {
 
 // Delete a Ride by driver ID
 exports.deleteRide = (req, res) => {
-  ride = req.body.assigned_rider;
-
   rideService
-    .deleteRide(ride)
+    .deleteRide(getId(req))
     .then((rider) => {
       res.status(200).json({ success: true, data: rider });
     })
@@ -72,11 +66,11 @@ exports.deleteRide = (req, res) => {
 
 // Delete a partner by id
 exports.deletePartner = (req, res) => {
-  rideId = req.body.ride_id;
-  partnerId = req.body.partner_id;
+  const riderId = getId(req);
+  const partnerId = req.body.partner_id;
 
   rideService
-    .deletePartner(rideId, partnerId)
+    .deletePartner(riderId, partnerId)
     .then((rider) => {
       res.status(200).json({ success: true, data: rider });
     })
@@ -84,5 +78,21 @@ exports.deletePartner = (req, res) => {
       res
         .status(400)
         .json({ success: false, error: "Deleting Ride Partner failed" });
+    });
+};
+
+// Get nearby partners for a rider
+exports.getNearby = (req, res) => {
+  const rider_email = getEmail(req);
+
+  rideService
+    .getNearby(rider_email)
+    .then((rider) => {
+      res.status(200).json({ success: true, data: rider });
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .json({ success: false, error: "Getting nearby Partners failed" });
     });
 };

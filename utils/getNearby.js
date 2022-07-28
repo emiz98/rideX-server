@@ -19,16 +19,22 @@ function deg2rad(deg) {
 }
 
 exports.getNearbyUsers = (radiusInKm, riderLocation, availablePartners) => {
-  for (let i = 0; i < availablePartners.length; i++) {
-    if (
-      getDistanceFromLatLonInKm(
-        riderLocation.lat,
-        riderLocation.lng,
-        availablePartners[i].lat,
-        availablePartners[i].lng
-      ) < radiusInKm
-    ) {
-      console.log(availablePartners[i].name);
-    }
-  }
+  var nearbyUsers = [];
+
+  console.log(availablePartners);
+
+  // for (let i = 0; i < availablePartners.length; i++) {
+  //   if (
+  //     getDistanceFromLatLonInKm(
+  //       riderLocation.lat,
+  //       riderLocation.long,
+  //       availablePartners[i].depart_to.lat,
+  //       availablePartners[i].depart_to.long
+  //     ) < radiusInKm
+  //   ) {
+  //       nearbyUsers.push(availablePartners[i]);
+  //   }
+  // }
+
+  return nearbyUsers;
 };

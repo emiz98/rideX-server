@@ -1,0 +1,11 @@
+test1 user token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyZTI3YTFhY2JmYjhjYjZiNTIyMDNmNCIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn0sImlhdCI6MTY1OTAwOTU4MH0.hWrsVGVOor7WHVYbIkNW5o5K8onq0CM-h0sLHAXsKKA
+test2 user token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYyZTI3OGJiYjhmMmRmYzBjZTM0OWJhMyIsImVtYWlsIjoidGVzdDJAZ21haWwuY29tIn0sImlhdCI6MTY1OTAwOTg4N30.2pomOkRizaBd8ExWmq8u85OdodOJk0IAcbRDcyutwwk
+
+
+User API
+    But can use the token from the deleted user to get user with same username agaon after
+    newly creating the user.
+
+
+Ride Service API
+    Get nearby partners  needs to be configured
