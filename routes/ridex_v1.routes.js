@@ -2,9 +2,11 @@ const express = require("express");
 const userController = require("../controllers/user.controller");
 const rideController = require("../controllers/ride.controller");
 const authController = require("../controllers/auth.controller");
+const clientController = require("../controllers/client.controller");
 const passport = require("passport");
 const router = express.Router();
 
+// **************************User Routes**************************
 // use 'passport.authenticate("jwt", { session: false })' as middleware to authenticate users
 router.get("/", userController.getIndex);
 router.get(
@@ -13,7 +15,7 @@ router.get(
   userController.getUsers
 );
 router.get(
-  "/user/:email",
+  "/user",
   passport.authenticate("jwt", { session: false }),
   userController.getUserByEmail
 );
@@ -36,14 +38,14 @@ router.post(
   authController.register
 );
 
-// ***Driver Routes***
+// **************************Driver Routes**************************
 router.post(
   "/ride/create",
   passport.authenticate("jwt", { session: false }),
   rideController.createRide
 );
 router.get(
-  "/ride/:ride_id",
+  "/ride",
   passport.authenticate("jwt", { session: false }),
   rideController.getRideDetails
 );
@@ -62,13 +64,30 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   rideController.deletePartner
 );
-router.get("/ride/get_nearby");
+router.get(
+  "/ride/get_nearby",
+  passport.authenticate("jwt", { session: false }),
+  rideController.getNearby
+);
 // Get ride history by driver(ride history schema)(GET)
 
-// ***Client Routes***
-// add a request(POST)
-// view request by client(GET)
+// **************************Client Routes**************************
+router.post(
+  "/client/create",
+  passport.authenticate("jwt", { session: false }),
+  clientController.createClientRequest
+);
+router.get(
+  "/client/get_request",
+  passport.authenticate("jwt", { session: false }),
+  clientController.getClientRequest
+);
+router.delete(
+  "/client/delete",
+  passport.authenticate("jwt", { session: false }),
+  clientController.deleteClient
+);
+
 // Get client history by client(GET)
-// Delete a booked reservation(DELETE)
 
 module.exports = router;

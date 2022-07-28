@@ -21,11 +21,6 @@ const RideSchema = new Schema({
     },
     available_seats: Number,
     created_at: Date,
-    is_ongoing: Boolean,
-    current_temp_location: {
-        lat: Number,
-        long: Number
-    }
 
 });
 
