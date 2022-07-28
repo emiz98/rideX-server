@@ -1,5 +1,5 @@
 Add driver and client requests - both client and rider can send requests
-and both should accept like uber
+and both should accept
 
 shuttle service
 
