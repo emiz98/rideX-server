@@ -67,7 +67,7 @@ exports.deleteRide = (req, res) => {
 // Delete a partner by id
 exports.deletePartner = (req, res) => {
   const riderId = getId(req);
-  const partnerId = req.body.partner_id;
+  const partnerId = req.body.partner;
 
   rideService
     .deletePartner(riderId, partnerId)

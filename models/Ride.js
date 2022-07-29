@@ -2,26 +2,32 @@ const mongoose = require("mongoose");
 const { Schema, model, models } = mongoose;
 
 // This is for the driver side
-const RideSchema = new Schema({
+const RideSchema = new Schema(
+  {
     assigned_rider: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
-    assigned_partners: [{
+    assigned_partners: [
+      {
         type: Schema.Types.ObjectId,
         ref: "User",
-    }],
+      },
+    ],
     vehicle_type: String,
     vehicle_no: String,
     depart_date: Date,
     depart_time: Date,
     depart_to: {
-        lat: Number,
-        long: Number
+      lat: Number,
+      long: Number,
     },
     available_seats: Number,
-    created_at: Date,
-
-});
+  },
+  {
+    versionKey: false,
+    timestamps: true,
+  }
+);
 
 module.exports = models.Ride || model("Ride", RideSchema);

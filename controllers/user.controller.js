@@ -1,60 +1,31 @@
 const userService = require("../services/user.service");
-const {getEmail} = require("../utils/decodeToken");
-
-
-exports.getIndex = (req, res) => {
-  res.send({
-    header: "Available endpoints",
-    user: [
-      {
-        "Create User": "/user/create",
-        "Get Users": "/users",
-        "Get User By Email": "/get_user/<Email>",
-        "Update User By Email": "/update_user/<Email>",
-        "Delete User By Email": "/user/delete"
-      },
-    ],
-  });
-};
-
-// Creating a new user
-// exports.createUser = (req, res) => {
-//   const user = req.body;
-
-//   userService
-//     .createUser(user)
-//     .then((users) => {
-//       res.status(200).json({ success: true, data: users });
-//     })
-//     .catch((err) => {
-//       res.status(400).json({ success: false, error: "Creating a user failed" });
-//     });
-
-// };
+const { getEmail } = require("../utils/decodeToken");
 
 // Get all users
 exports.getUsers = (req, res) => {
   userService
     .getUsers()
-    .then(users => {
+    .then((users) => {
       res.status(200).json({ success: true, data: users });
     })
     .catch((err) => {
-      res.status(400).json({ success: false, error: "Getting list of Users failed" });
+      res
+        .status(400)
+        .json({ success: false, error: "Getting list of Users failed" });
     });
-
 };
 
 // Get user By email
 exports.getUserByEmail = (req, res) => {
-
   userService
     .getUserByEmail(getEmail(req))
-    .then(user => {
+    .then((user) => {
       res.status(200).json({ success: true, data: user });
     })
     .catch((err) => {
-      res.status(400).json({ success: false, error: "Getting user by email failed" });
+      res
+        .status(400)
+        .json({ success: false, error: "Getting user by email failed" });
     });
 };
 
@@ -64,23 +35,26 @@ exports.updateUser = (req, res) => {
 
   userService
     .updateUser(user, getEmail(req))
-    .then(user => {
+    .then((user) => {
       res.status(200).json({ success: true, data: user });
     })
     .catch((err) => {
-      res.status(400).json({ success: false, error: "Updating user by email failed" });
+      res
+        .status(400)
+        .json({ success: false, error: "Updating user by email failed" });
     });
 };
 
 // Delete a user
 exports.deleteUser = (req, res) => {
-
   userService
     .deleteUser(getEmail(req))
-    .then(user => {
+    .then((user) => {
       res.status(200).json({ success: true, data: user });
     })
     .catch((err) => {
-      res.status(400).json({ success: false, error: "Deleting user by email failed" });
+      res
+        .status(400)
+        .json({ success: false, error: "Deleting user by email failed" });
     });
-}
+};

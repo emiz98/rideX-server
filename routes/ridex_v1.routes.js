@@ -8,7 +8,7 @@ const router = express.Router();
 
 // **************************User Routes**************************
 // use 'passport.authenticate("jwt", { session: false })' as middleware to authenticate users
-router.get("/", userController.getIndex);
+// router.get("/", userController.getIndex);
 router.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -50,7 +50,7 @@ router.get(
   rideController.getRideDetails
 );
 router.put(
-  "/ride/update",
+  "/ride/partner/add",
   passport.authenticate("jwt", { session: false }),
   rideController.updatePartners
 );
@@ -60,7 +60,7 @@ router.delete(
   rideController.deleteRide
 );
 router.delete(
-  "/ride/delete_partner",
+  "/ride/partner/delete",
   passport.authenticate("jwt", { session: false }),
   rideController.deletePartner
 );
@@ -78,7 +78,7 @@ router.post(
   clientController.createClientRequest
 );
 router.get(
-  "/client/get_request",
+  "/client",
   passport.authenticate("jwt", { session: false }),
   clientController.getClientRequest
 );
